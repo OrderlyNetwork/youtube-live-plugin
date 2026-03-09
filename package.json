@@ -1,0 +1,36 @@
+{
+  "name": "@orderly.network/youtube-live-plugin",
+  "version": "0.1.0",
+  "description": "Orderly SDK plugin — youtube-live",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "@orderly.network/plugin-core": "2.8.14-internal-plugin.0",
+    "@orderly.network/hooks": "2.8.14-internal-plugin.0",
+    "@orderly.network/i18n": "2.8.14-internal-plugin.0",
+    "@orderly.network/types": "2.8.14-internal-plugin.0",
+    "@orderly.network/ui": "2.8.14-internal-plugin.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.17",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.1.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
