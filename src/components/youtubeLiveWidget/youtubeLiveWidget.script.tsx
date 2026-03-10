@@ -4,6 +4,7 @@ import type { TYoutubeLiveLocales } from "../../i18n/module";
 import {
   buildAutoplayIframeSrc,
   buildPiPIframeHtml,
+  clampPosition,
   getDocumentPiPApi,
   getPositionStyle,
   isDocumentPiPSupported,
@@ -21,14 +22,20 @@ export type FloatingVideoPosition =
 /** Video display mode: iframe for embedded YouTube/web pages; video for direct URLs */
 export type VideoDisplayMode = "iframe" | "video";
 
+interface Size {
+  width: number;
+  height: number;
+}
+
 export interface YoutubeLiveWidgetVideoRef {
   current: HTMLVideoElement | null;
 }
 
+const DEFAULT_FIXED_POSITION = "bottom-right" as const;
+
 export interface UseYoutubeLiveWidgetScriptOptions {
   src: string;
   displayMode?: VideoDisplayMode;
-  defaultPosition?: FloatingVideoPosition;
   defaultWidth?: number;
   defaultHeight?: number;
   minWidth?: number;
@@ -51,7 +58,6 @@ export const useYoutubeLiveWidgetScript = (
   const {
     src,
     displayMode = "iframe",
-    defaultPosition = "bottom-right",
     defaultWidth = 384,
     defaultHeight = 216,
     minWidth: minWidthProp = 400,
@@ -66,14 +72,20 @@ export const useYoutubeLiveWidgetScript = (
     videoRef: videoRefProp,
   } = options;
 
-  const pipUnsupportedMsg = t("youtubeLive.pipUnsupported");
-  const pipTitle = t("youtubeLive.titleYouTubeLive");
+  const pipUnsupportedMsg = useMemo(
+    () => t("youtubeLive.pipUnsupported"),
+    [t],
+  );
+  const pipTitle = useMemo(() => t("youtubeLive.titleYouTubeLive"), [t]);
 
   const [mode, setMode] = useState<FloatingVideoMode>("inline");
   const [pipError, setPipError] = useState<string | null>(null);
-  const [position, setPosition] =
-    useState<FloatingVideoPosition>(defaultPosition);
-  const [size, setSize] = useState({
+  const [pixelPosition, setPixelPosition] = useState<{
+    left: number;
+    top: number;
+  } | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [size, setSize] = useState<Size>({
     width: defaultWidth,
     height: defaultHeight,
   });
@@ -111,13 +123,9 @@ export const useYoutubeLiveWidgetScript = (
 
   const videoRef = useCallback(
     (el: HTMLVideoElement | null) => {
-      (
-        videoRefInternal as React.MutableRefObject<HTMLVideoElement | null>
-      ).current = el;
+      (videoRefInternal as React.MutableRefObject<HTMLVideoElement | null>).current = el;
       if (videoRefProp) {
-        (
-          videoRefProp as React.MutableRefObject<HTMLVideoElement | null>
-        ).current = el;
+        (videoRefProp as React.MutableRefObject<HTMLVideoElement | null>).current = el;
       }
     },
     [videoRefProp],
@@ -141,15 +149,20 @@ export const useYoutubeLiveWidgetScript = (
     if (!persistLayout) return;
     const stored = loadStoredLayout();
     if (!stored) return;
-    setPosition((stored.position as FloatingVideoPosition) ?? defaultPosition);
     let w = stored.width ?? defaultWidth;
     let h = stored.height ?? defaultHeight;
     if (maxWidthProp != null && w > maxWidthProp) w = maxWidthProp;
     if (maxHeightProp != null && h > maxHeightProp) h = maxHeightProp;
     setSize({ width: w, height: h });
+    if (
+      typeof stored.left === "number" &&
+      typeof stored.top === "number"
+    ) {
+      const clamped = clampPosition(stored.left, stored.top, w, h);
+      setPixelPosition({ left: clamped.left, top: clamped.top });
+    }
   }, [
     defaultHeight,
-    defaultPosition,
     defaultWidth,
     maxHeightProp,
     maxWidthProp,
@@ -159,11 +172,27 @@ export const useYoutubeLiveWidgetScript = (
   useEffect(() => {
     if (!persistLayout) return;
     saveStoredLayout({
-      position,
+      position: DEFAULT_FIXED_POSITION,
       width: size.width,
       height: size.height,
+      ...(pixelPosition != null && {
+        left: pixelPosition.left,
+        top: pixelPosition.top,
+      }),
     });
-  }, [persistLayout, position, size.height, size.width]);
+  }, [persistLayout, pixelPosition, size.height, size.width]);
+
+  const RESIZE_THRESHOLD = 2;
+
+  const applyClampedSize = useCallback(
+    (pw: number, ph: number) => {
+      setSize({
+        width: maxWidthProp != null && pw > maxWidthProp ? maxWidthProp : pw,
+        height: maxHeightProp != null && ph > maxHeightProp ? maxHeightProp : ph,
+      });
+    },
+    [maxWidthProp, maxHeightProp],
+  );
 
   useEffect(() => {
     if (!persistLayout || typeof ResizeObserver === "undefined") return;
@@ -172,11 +201,14 @@ export const useYoutubeLiveWidgetScript = (
     const observer = new ResizeObserver(([entry]) => {
       const nextWidth = Math.round(entry.contentRect.width);
       const nextHeight = Math.round(entry.contentRect.height);
-      setSize((prev) =>
-        prev.width === nextWidth && prev.height === nextHeight
+      setSize((prev: Size) => {
+        const dw = Math.abs(prev.width - nextWidth);
+        const dh = Math.abs(prev.height - nextHeight);
+        if (dw <= RESIZE_THRESHOLD && dh <= RESIZE_THRESHOLD) return prev;
+        return prev.width === nextWidth && prev.height === nextHeight
           ? prev
-          : { width: nextWidth, height: nextHeight },
-      );
+          : { width: nextWidth, height: nextHeight };
+      });
     });
     observer.observe(element);
     return () => observer.disconnect();
@@ -217,20 +249,12 @@ export const useYoutubeLiveWidgetScript = (
         pipWindow.document.close();
 
         const onClose = () => {
-          // Restore original iframe so it resumes (live stream picks up current position).
-          if (originalIframe) {
-            originalIframe.src = effectiveSrc;
-          }
+          if (originalIframe) originalIframe.src = effectiveSrc;
           documentPiPWindowRef.current = null;
           pipPageHideHandlerRef.current = null;
           pipWindow.removeEventListener("pagehide", onClose);
           const { width: pw, height: ph } = presetSizeRef.current;
-          setSize({
-            width:
-              maxWidthProp != null && pw > maxWidthProp ? maxWidthProp : pw,
-            height:
-              maxHeightProp != null && ph > maxHeightProp ? maxHeightProp : ph,
-          });
+          applyClampedSize(pw, ph);
           setPipUsesHtmlDocument(false);
           setMode("inline");
         };
@@ -295,11 +319,7 @@ export const useYoutubeLiveWidgetScript = (
         pipPageHideHandlerRef.current = null;
         pipWindow.removeEventListener("pagehide", onClose);
         const { width: pw, height: ph } = presetSizeRef.current;
-        setSize({
-          width: maxWidthProp != null && pw > maxWidthProp ? maxWidthProp : pw,
-          height:
-            maxHeightProp != null && ph > maxHeightProp ? maxHeightProp : ph,
-        });
+        applyClampedSize(pw, ph);
         setMode("inline");
       };
       pipPageHideHandlerRef.current = onClose;
@@ -315,10 +335,9 @@ export const useYoutubeLiveWidgetScript = (
       return false;
     }
   }, [
+    applyClampedSize,
     displayMode,
     effectiveSrc,
-    maxHeightProp,
-    maxWidthProp,
     pipSrc,
     pipSupported,
     pipTitle,
@@ -345,13 +364,89 @@ export const useYoutubeLiveWidgetScript = (
       document.removeEventListener("visibilitychange", onVisibilityChange);
   }, [autoPipOnVisibilityChange, pipSupported, enterPiP]);
 
-  const positionStyle = useMemo(() => getPositionStyle(position), [position]);
+  const positionStyle = useMemo(
+    () =>
+      pixelPosition != null
+        ? { left: pixelPosition.left, top: pixelPosition.top }
+        : getPositionStyle(DEFAULT_FIXED_POSITION),
+    [pixelPosition],
+  );
+
+  const onDragHandlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (e.button !== 0) return;
+      // 不拦截 Select、PipIcon 等可交互元素的点击
+      if ((e.target as HTMLElement).closest("[data-no-drag]")) return;
+      const widget = widgetRef.current;
+      const target = e.currentTarget;
+      if (!widget) return;
+      e.preventDefault();
+      target.setPointerCapture(e.pointerId);
+      const rect = widget.getBoundingClientRect();
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const startLeft =
+        pixelPosition != null ? pixelPosition.left : rect.left;
+      const startTop = pixelPosition != null ? pixelPosition.top : rect.top;
+
+      let lastClamped = { left: startLeft, top: startTop };
+
+      const onPointerMove = (moveEvent: PointerEvent) => {
+        const dx = moveEvent.clientX - startX;
+        const dy = moveEvent.clientY - startY;
+        const next = clampPosition(
+          startLeft + dx,
+          startTop + dy,
+          size.width,
+          size.height,
+        );
+        lastClamped = next;
+        widget.style.left = `${next.left}px`;
+        widget.style.top = `${next.top}px`;
+        widget.style.right = "";
+        widget.style.bottom = "";
+      };
+
+      const exitDrag = (finalPosition: { left: number; top: number }) => {
+        try {
+          target.releasePointerCapture(e.pointerId);
+        } catch {
+          // ignore if already released
+        }
+        target.removeEventListener("pointermove", onPointerMove as EventListener);
+        target.removeEventListener("pointerup", onPointerUp as EventListener);
+        target.removeEventListener(
+          "pointercancel",
+          onPointerCancel as EventListener,
+        );
+        setIsDragging(false);
+        setPixelPosition(finalPosition);
+      };
+
+      const onPointerUp = (upEvent: PointerEvent) => {
+        if (upEvent.button !== 0) return;
+        exitDrag(lastClamped);
+      };
+
+      const onPointerCancel = () => {
+        exitDrag(lastClamped);
+      };
+
+      setIsDragging(true);
+      target.addEventListener("pointermove", onPointerMove as EventListener);
+      target.addEventListener("pointerup", onPointerUp as EventListener);
+      target.addEventListener("pointercancel", onPointerCancel as EventListener);
+    },
+    [pixelPosition, size.height, size.width],
+  );
 
   return {
     mode,
     pipError,
-    position,
-    setPosition,
+    pixelPosition,
+    setPixelPosition,
+    isDragging,
+    onDragHandlePointerDown,
     size,
     minWidthProp,
     minHeightProp,

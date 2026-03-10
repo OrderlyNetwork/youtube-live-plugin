@@ -1,17 +1,9 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, memo } from "react";
 import { useTranslation } from "@orderly.network/i18n";
-import { Box, cn, Flex, Select, Text } from "@orderly.network/ui";
+import { Box, cn, Flex, Text } from "@orderly.network/ui";
 import PipIcon from "../pip_icon";
-import { POSITION_OPTIONS } from "../utils";
 import type { TYoutubeLiveLocales } from "../../i18n/module";
 import type { YoutubeLiveWidgetState } from "./youtubeLiveWidget.script";
-
-const POSITION_LABEL_KEYS: Record<string, keyof TYoutubeLiveLocales> = {
-  "top-left": "youtubeLive.positionTopLeft",
-  "top-right": "youtubeLive.positionTopRight",
-  "bottom-left": "youtubeLive.positionBottomLeft",
-  "bottom-right": "youtubeLive.positionBottomRight",
-};
 
 const MEDIA_FILL_STYLE: React.CSSProperties = {
   position: "absolute",
@@ -24,24 +16,28 @@ const MEDIA_FILL_STYLE: React.CSSProperties = {
   zIndex: 1,
 };
 
+const TOOLBAR_CLASS =
+  "oui-w-full oui-bg-base-8 oui-rounded-lg oui-px-2.5 oui-py-2 oui-text-white oui-text-xs oui-flex-shrink-0";
+
 export type YoutubeLiveWidgetProps = YoutubeLiveWidgetState & {
   className?: string;
   style?: React.CSSProperties;
+  /** Optional title in toolbar (replaces position selector). Supports string or ReactNode. */
+  title?: string | React.ReactNode;
   /** Extra controls rendered on the right side of the toolbar */
   extraControls?: React.ReactNode;
 };
 
-export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
+export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
   const { t: tBase } = useTranslation();
   const t = tBase as (key: keyof TYoutubeLiveLocales) => string;
   const {
     className,
     style,
+    title,
     extraControls,
     mode,
     pipError,
-    position,
-    setPosition,
     size,
     minWidthProp,
     minHeightProp,
@@ -55,6 +51,8 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
     videoRef,
     togglePiP,
     positionStyle,
+    onDragHandlePointerDown,
+    isDragging,
     displayMode,
     effectiveSrc,
     autoPlay,
@@ -62,15 +60,6 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
     controls,
     pipUnsupportedMsg,
   } = props;
-
-  const positionOptions = useMemo(
-    () =>
-      POSITION_OPTIONS.map((o) => ({
-        value: o.value,
-        label: t(POSITION_LABEL_KEYS[o.value] ?? "youtubeLive.positionTopLeft"),
-      })),
-    [t],
-  );
 
   return (
     <Flex
@@ -97,24 +86,29 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
           direction="row"
           itemAlign="center"
           gap={2}
-          className="oui-w-full oui-bg-base-8 oui-rounded-lg oui-px-2.5 oui-py-2 oui-text-white oui-text-xs"
-          style={{ zIndex: 1 }}
+          className={TOOLBAR_CLASS}
+          style={{
+            zIndex: 10,
+            position: "relative",
+            minHeight: 40,
+            cursor: isDragging ? "grabbing" : "grab",
+            touchAction: "none",
+          }}
+          onPointerDown={onDragHandlePointerDown}
         >
-          <Text size="2xs" className="oui-whitespace-nowrap oui-ml-2">
-            {t("youtubeLive.positionLabel")}
-          </Text>
-          <Select.options
-            size="xs"
-            value={position}
-            onValueChange={(v) => setPosition(v as typeof position)}
-            options={positionOptions}
-            classNames={{
-              trigger:
-                "oui-bg-blue oui-border-0 oui-w-auto oui-px-0 oui-font-normal",
-            }}
-            contentProps={{ style: { zIndex: 10000 } }}
-          />
+          {title != null ? (
+            <span data-no-drag className="oui-ml-2">
+              {typeof title === "string" ? (
+                <Text size="2xs" className="oui-whitespace-nowrap">
+                  {title}
+                </Text>
+              ) : (
+                title
+              )}
+            </span>
+          ) : null}
           <PipIcon
+            data-no-drag
             size={16}
             onClick={togglePiP}
             disabled={!pipSupported}
@@ -127,18 +121,18 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
               {pipError || pipUnsupportedMsg}
             </Text>
           )}
-          {extraControls}
+          {extraControls ? <span data-no-drag>{extraControls}</span> : null}
         </Flex>
       )}
       <Box
         ref={wrapperRef}
         className={cn(
           "oui-resize oui-resize-both oui-overflow-hidden oui-bg-black oui-rounded-xl",
-          "oui-shadow-[0_10px_30px_rgba(0,0,0,0.45)]",
+          "oui-shadow-[0_10px_30px_rgba(0,0,0,0.45)] oui-flex-shrink-0",
         )}
         style={{
           position: "relative",
-          zIndex: 2,
+          zIndex: 1,
           width: mode === "pip" ? "100%" : size.width,
           height: mode === "pip" ? "100%" : size.height,
           minWidth: mode === "pip" ? 0 : minWidthProp,
@@ -176,4 +170,5 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
       </Box>
     </Flex>
   );
-};
+});
+YoutubeLiveWidget.displayName = "YoutubeLiveWidget";

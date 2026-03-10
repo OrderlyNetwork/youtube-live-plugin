@@ -2,6 +2,8 @@ export interface StoredLayout {
   position?: string;
   width?: number;
   height?: number;
+  left?: number;
+  top?: number;
 }
 
 export interface DocumentPictureInPictureApi {
@@ -12,14 +14,33 @@ export interface DocumentPictureInPictureApi {
 const POSITION_OFFSET = 20;
 
 export const STORAGE_KEY = "orderly.youtube-live.layout.v1";
-export const POSITION_OPTIONS = [
-  { value: "top-left", label: "Top Left" },
-  { value: "top-right", label: "Top Right" },
-  { value: "bottom-left", label: "Bottom Left" },
-  { value: "bottom-right", label: "Bottom Right" },
-];
 
-export function getPositionStyle(position: string) {
+const VIEWPORT_MARGIN = 20;
+
+/** Clamp left/top so the widget stays within viewport with margin. */
+export function clampPosition(
+  left: number,
+  top: number,
+  width: number,
+  height: number,
+): { left: number; top: number } {
+  if (typeof window === "undefined") {
+    return { left, top };
+  }
+  const maxLeft = window.innerWidth - width - VIEWPORT_MARGIN;
+  const maxTop = window.innerHeight - height - VIEWPORT_MARGIN;
+  return {
+    left: Math.max(VIEWPORT_MARGIN, Math.min(left, maxLeft)),
+    top: Math.max(VIEWPORT_MARGIN, Math.min(top, maxTop)),
+  };
+}
+
+export function getPositionStyle(position: string): {
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
+} {
   switch (position) {
     case "top-left":
       return { top: POSITION_OFFSET, left: POSITION_OFFSET };
@@ -28,7 +49,6 @@ export function getPositionStyle(position: string) {
     case "bottom-left":
       return { bottom: POSITION_OFFSET, left: POSITION_OFFSET };
     case "bottom-right":
-      return { bottom: POSITION_OFFSET, right: POSITION_OFFSET };
     default:
       return { bottom: POSITION_OFFSET, right: POSITION_OFFSET };
   }
@@ -80,6 +100,8 @@ export function saveStoredLayout(layout: {
   position: string;
   width: number;
   height: number;
+  left?: number;
+  top?: number;
 }) {
   if (typeof window === "undefined") {
     return;
