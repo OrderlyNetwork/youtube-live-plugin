@@ -10,6 +10,7 @@ import { YoutubeLiveWidgetWidget } from "./components/youtubeLiveWidget/youtubeL
 const YoutubeLiveWidget = YoutubeLiveWidgetWidget;
 
 export { YoutubeLiveWidget };
+export { YoutubeLiveLocaleProvider } from "./i18n";
 export type { VideoDisplayMode, FloatingVideoPosition };
 
 export interface OrderlyYoutubeLivePluginOptions {

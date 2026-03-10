@@ -110,8 +110,12 @@ export function buildAutoplayIframeSrc(
 }
 
 /** Build minimal HTML document for PiP iframe mode (YouTube referrer requirement). */
-export function buildPiPIframeHtml(src: string): string {
+export function buildPiPIframeHtml(
+  src: string,
+  title?: string,
+): string {
   const safeSrc = src.replace(/"/g, "&quot;");
+  const safeTitle = (title ?? "YouTube Live").replace(/"/g, "&quot;");
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -130,7 +134,7 @@ export function buildPiPIframeHtml(src: string): string {
     referrerpolicy="strict-origin-when-cross-origin"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen
-    title="YouTube Live"
+    title="${safeTitle}"
   ></iframe>
 </body>
 </html>`;

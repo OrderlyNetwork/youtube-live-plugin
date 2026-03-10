@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "@orderly.network/i18n";
+import type { TYoutubeLiveLocales } from "../../i18n/module";
 import {
   buildAutoplayIframeSrc,
   buildPiPIframeHtml,
@@ -8,8 +10,6 @@ import {
   loadStoredLayout,
   saveStoredLayout,
 } from "../utils";
-
-const PIP_UNSUPPORTED_MSG = "Current browser does not support";
 
 export type FloatingVideoMode = "inline" | "pip";
 export type FloatingVideoPosition =
@@ -46,6 +46,8 @@ export interface UseYoutubeLiveWidgetScriptOptions {
 export const useYoutubeLiveWidgetScript = (
   options: UseYoutubeLiveWidgetScriptOptions,
 ) => {
+  const { t: tBase } = useTranslation();
+  const t = tBase as (key: keyof TYoutubeLiveLocales) => string;
   const {
     src,
     displayMode = "iframe",
@@ -63,6 +65,9 @@ export const useYoutubeLiveWidgetScript = (
     controls = true,
     videoRef: videoRefProp,
   } = options;
+
+  const pipUnsupportedMsg = t("youtubeLive.pipUnsupported");
+  const pipTitle = t("youtubeLive.titleYouTubeLive");
 
   const [mode, setMode] = useState<FloatingVideoMode>("inline");
   const [pipError, setPipError] = useState<string | null>(null);
@@ -180,12 +185,12 @@ export const useYoutubeLiveWidgetScript = (
   const enterPiP = useCallback(async () => {
     setPipError(null);
     if (!pipSupported) {
-      setPipError(PIP_UNSUPPORTED_MSG);
+      setPipError(pipUnsupportedMsg);
       return false;
     }
     const docPiP = getDocumentPiPApi();
     if (!docPiP) {
-      setPipError(PIP_UNSUPPORTED_MSG);
+      setPipError(pipUnsupportedMsg);
       return false;
     }
 
@@ -208,7 +213,7 @@ export const useYoutubeLiveWidgetScript = (
         }
 
         pipWindow.document.open();
-        pipWindow.document.write(buildPiPIframeHtml(pipSrc));
+        pipWindow.document.write(buildPiPIframeHtml(pipSrc, pipTitle));
         pipWindow.document.close();
 
         const onClose = () => {
@@ -236,7 +241,7 @@ export const useYoutubeLiveWidgetScript = (
         return true;
       } catch {
         documentPiPWindowRef.current = null;
-        setPipError(PIP_UNSUPPORTED_MSG);
+        setPipError(pipUnsupportedMsg);
         return false;
       }
     }
@@ -245,7 +250,7 @@ export const useYoutubeLiveWidgetScript = (
     // HTMLVideoElement is transferred and playback continues uninterrupted.
     const widget = widgetRef.current;
     if (!widget || !widget.parentElement) {
-      setPipError("Video element is not ready");
+      setPipError(t("youtubeLive.videoNotReady"));
       return false;
     }
 
@@ -306,7 +311,7 @@ export const useYoutubeLiveWidgetScript = (
       restoreWidgetFromPiP();
       pipPageHideHandlerRef.current = null;
       documentPiPWindowRef.current = null;
-      setPipError(PIP_UNSUPPORTED_MSG);
+      setPipError(pipUnsupportedMsg);
       return false;
     }
   }, [
@@ -316,9 +321,12 @@ export const useYoutubeLiveWidgetScript = (
     maxWidthProp,
     pipSrc,
     pipSupported,
+    pipTitle,
+    pipUnsupportedMsg,
     restoreWidgetFromPiP,
     size.width,
     size.height,
+    t,
   ]);
 
   const togglePiP = useCallback(async () => {
@@ -362,7 +370,7 @@ export const useYoutubeLiveWidgetScript = (
     autoPlay,
     muted,
     controls,
-    PIP_UNSUPPORTED_MSG,
+    pipUnsupportedMsg,
   };
 };
 

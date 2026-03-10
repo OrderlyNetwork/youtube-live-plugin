@@ -14,6 +14,7 @@ export default defineConfig((options) => ({
     "react-dom",
     "@orderly.network/plugin-core",
     "@orderly.network/hooks",
+    "@orderly.network/i18n",
     "@orderly.network/ui",
     "@orderly.network/trading",
   ],

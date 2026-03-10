@@ -1,8 +1,17 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
+import { useTranslation } from "@orderly.network/i18n";
 import { Box, cn, Flex, Select, Text } from "@orderly.network/ui";
 import PipIcon from "../pip_icon";
 import { POSITION_OPTIONS } from "../utils";
+import type { TYoutubeLiveLocales } from "../../i18n/module";
 import type { YoutubeLiveWidgetState } from "./youtubeLiveWidget.script";
+
+const POSITION_LABEL_KEYS: Record<string, keyof TYoutubeLiveLocales> = {
+  "top-left": "youtubeLive.positionTopLeft",
+  "top-right": "youtubeLive.positionTopRight",
+  "bottom-left": "youtubeLive.positionBottomLeft",
+  "bottom-right": "youtubeLive.positionBottomRight",
+};
 
 const MEDIA_FILL_STYLE: React.CSSProperties = {
   position: "absolute",
@@ -23,6 +32,8 @@ export type YoutubeLiveWidgetProps = YoutubeLiveWidgetState & {
 };
 
 export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
+  const { t: tBase } = useTranslation();
+  const t = tBase as (key: keyof TYoutubeLiveLocales) => string;
   const {
     className,
     style,
@@ -49,8 +60,17 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
     autoPlay,
     muted,
     controls,
-    PIP_UNSUPPORTED_MSG,
+    pipUnsupportedMsg,
   } = props;
+
+  const positionOptions = useMemo(
+    () =>
+      POSITION_OPTIONS.map((o) => ({
+        value: o.value,
+        label: t(POSITION_LABEL_KEYS[o.value] ?? "youtubeLive.positionTopLeft"),
+      })),
+    [t],
+  );
 
   return (
     <Flex
@@ -81,13 +101,13 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
           style={{ zIndex: 1 }}
         >
           <Text size="2xs" className="oui-whitespace-nowrap oui-ml-2">
-            Position:
+            {t("youtubeLive.positionLabel")}
           </Text>
           <Select.options
             size="xs"
             value={position}
             onValueChange={(v) => setPosition(v as typeof position)}
-            options={[...POSITION_OPTIONS]}
+            options={positionOptions}
             classNames={{
               trigger:
                 "oui-bg-blue oui-border-0 oui-w-auto oui-px-0 oui-font-normal",
@@ -100,11 +120,11 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
             disabled={!pipSupported}
             className="oui-cursor-pointer oui-text-base-contrast-54 hover:oui-text-base-contrast"
           >
-            Enter PiP
+            {t("youtubeLive.enterPip")}
           </PipIcon>
           {(pipError || !pipSupported) && (
             <Text size="2xs" className="oui-text-red-400 oui-whitespace-nowrap">
-              {pipError || PIP_UNSUPPORTED_MSG}
+              {pipError || pipUnsupportedMsg}
             </Text>
           )}
           {extraControls}
@@ -144,7 +164,7 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = (props) => {
           <iframe
             ref={iframeRef}
             src={effectiveSrc}
-            title="YouTube Live"
+            title={t("youtubeLive.titleYouTubeLive")}
             frameBorder={0}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"

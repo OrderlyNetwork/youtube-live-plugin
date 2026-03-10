@@ -6,20 +6,22 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch"
+    "build": "tsup && cp -r src/i18n/locales dist/locales",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@orderly.network/plugin-core": "2.8.14-internal-plugin.0",
-    "@orderly.network/hooks": "2.8.14-internal-plugin.0",
-    "@orderly.network/i18n": "2.8.14-internal-plugin.0",
-    "@orderly.network/types": "2.8.14-internal-plugin.0",
-    "@orderly.network/ui": "2.8.14-internal-plugin.0"
+    "@orderly.network/plugin-core": "2.8.14-internal-plugin-1.0",
+    "@orderly.network/hooks": "2.10.2-internal-plugin-1.0",
+    "@orderly.network/i18n": "2.10.2-internal-plugin-1.0",
+    "@orderly.network/types": "2.10.2-internal-plugin-1.0",
+    "@orderly.network/ui": "2.10.2-internal-plugin-1.0"
   },
   "dependencies": {},
   "devDependencies": {
