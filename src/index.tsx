@@ -6,6 +6,7 @@ import type {
   VideoDisplayMode,
 } from "./components/youtubeLiveWidget";
 import { YoutubeLiveWidgetWidget } from "./components/youtubeLiveWidget/youtubeLiveWidget.widget";
+import { YoutubeLiveLocaleProvider } from "./i18n";
 
 const YoutubeLiveWidget = YoutubeLiveWidgetWidget;
 
@@ -60,21 +61,23 @@ export function registerOrderlyYoutubeLivePlugin(
         createInterceptor("Trading.TradingPage", (Original, props, _api) => (
           <>
             <Original {...props} />
-            <YoutubeLiveWidget
-              className={options.className}
-              src={options.src}
-              displayMode={options.displayMode}
-              defaultPosition={options.defaultPosition}
-              defaultWidth={options.defaultWidth}
-              defaultHeight={options.defaultHeight}
-              minWidth={options.minWidth}
-              minHeight={options.minHeight}
-              autoPipOnVisibilityChange={options.autoPipOnVisibilityChange}
-              persistLayout={options.persistLayout}
-              autoPlay={options.autoPlay}
-              muted={options.muted}
-              controls={options.controls}
-            />
+            <YoutubeLiveLocaleProvider>
+              <YoutubeLiveWidget
+                className={options.className}
+                src={options.src}
+                displayMode={options.displayMode}
+                defaultPosition={options.defaultPosition}
+                defaultWidth={options.defaultWidth}
+                defaultHeight={options.defaultHeight}
+                minWidth={options.minWidth}
+                minHeight={options.minHeight}
+                autoPipOnVisibilityChange={options.autoPipOnVisibilityChange}
+                persistLayout={options.persistLayout}
+                autoPlay={options.autoPlay}
+                muted={options.muted}
+                controls={options.controls}
+              />
+            </YoutubeLiveLocaleProvider>
           </>
         )),
       ],
