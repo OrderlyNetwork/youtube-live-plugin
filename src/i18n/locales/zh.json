@@ -1,0 +1,11 @@
+{
+  "youtubeLive.positionLabel": "位置：",
+  "youtubeLive.positionTopLeft": "左上",
+  "youtubeLive.positionTopRight": "右上",
+  "youtubeLive.positionBottomLeft": "左下",
+  "youtubeLive.positionBottomRight": "右下",
+  "youtubeLive.enterPip": "画中画",
+  "youtubeLive.pipUnsupported": "当前浏览器不支持画中画",
+  "youtubeLive.videoNotReady": "视频未就绪",
+  "youtubeLive.titleYouTubeLive": "YouTube 直播"
+}
