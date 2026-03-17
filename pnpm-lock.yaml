@@ -9,23 +9,23 @@ importers:
   .:
     dependencies:
       '@orderly.network/hooks':
-        specifier: 2.10.2-internal-plugin-beta.0
-        version: 2.10.2-internal-plugin-beta.0(@types/react@18.3.28)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
+        specifier: 3.0.0-beta.0
+        version: 3.0.0-beta.0(@types/react@18.3.28)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@orderly.network/i18n':
-        specifier: 2.10.2-internal-plugin-beta.0
-        version: 2.10.2-internal-plugin-beta.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+        specifier: 3.0.0-beta.0
+        version: 3.0.0-beta.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       '@orderly.network/plugin-core':
-        specifier: 2.8.14-internal-plugin-beta.0
-        version: 2.8.14-internal-plugin-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
+        specifier: 3.0.0-beta.0
+        version: 3.0.0-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@orderly.network/types':
-        specifier: 2.10.2-internal-plugin-beta.0
-        version: 2.10.2-internal-plugin-beta.0
+        specifier: 3.0.0-beta.0
+        version: 3.0.0-beta.0
       '@orderly.network/ui':
-        specifier: 2.10.2-internal-plugin-beta.0
-        version: 2.10.2-internal-plugin-beta.0(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(bufferutil@4.1.0)(embla-carousel@8.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.2.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
+        specifier: 3.0.0-beta.0
+        version: 3.0.0-beta.0(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(bufferutil@4.1.0)(embla-carousel@8.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.2.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@orderly.network/utils':
-        specifier: 2.10.2-internal-plugin-beta.0
-        version: 2.10.2-internal-plugin-beta.0
+        specifier: 3.0.0-beta.0
+        version: 3.0.0-beta.0
     devDependencies:
       '@types/react':
         specifier: ^18.2.38
@@ -456,54 +456,54 @@ packages:
   '@noble/secp256k1@1.7.2':
     resolution: {integrity: sha512-/qzwYl5eFLH8OWIecQWM31qld2g1NfjgylK+TNhqtaUKP37Nm+Y+z30Fjhw0Ct8p9yCQEm2N3W/AckdIb3SMcQ==}
 
-  '@orderly.network/core@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-MhwQcWf+KSSy4+vtW1TbFee4K40oJZZTJ9H5+jbGdTPvx3kIGp4tWUt+HQ+734tdJ1Na4o5143g8DWvyPB4q1Q==}
+  '@orderly.network/core@3.0.0-beta.0':
+    resolution: {integrity: sha512-0yQsphcL7zE4fj+AMVegW2C0dUya0KPIZA/d1W26iQKdGevf3q1JNhCrRqmkXoeAMbfF8Y05ZT1PxMASzdujiA==}
 
-  '@orderly.network/default-evm-adapter@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-uYq8oqBeSoeY1QSDywEVwED82e1LJBVpQuWXqcCfvbGid7wOuA943898Mvc/SESs2Dje64ZjlkpT3qnfA7cl6Q==}
+  '@orderly.network/default-evm-adapter@3.0.0-beta.0':
+    resolution: {integrity: sha512-/p0DQfSAl0ElDtEu33TaJDtSbQfwjHnrouCMKxDQyzYL+6YxOMXEYJZ1XYrQDyuH3anyM2dyUq8HUKWcHzSqqA==}
 
-  '@orderly.network/default-solana-adapter@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-rTFeGaWeMii2TbRNZCgjZvMt45wiOUjqnG6SsKVhLDZuIzm+g/u3Yw0/QLlktSQsO9GxtHh6+9jKfvj8Fkt8Iw==}
+  '@orderly.network/default-solana-adapter@3.0.0-beta.0':
+    resolution: {integrity: sha512-+9kt0i32bZFsysXgfr2F81R69wIrOuFvRVVcVTOHh5H/qj99v8vQPnQS9OlpxzZTH348HqphPApt3SI9AVx1EQ==}
 
-  '@orderly.network/hooks@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-JHd5R6F8KhZ4QXosAFPcOHhF9LT44oJQIlH6xOyiIOsIjgbmtQBRRpSbO678nB/ECzzJQFDZuSgGL/GrJdmkLw==}
+  '@orderly.network/hooks@3.0.0-beta.0':
+    resolution: {integrity: sha512-4sq5fxvaPKUl87Mx2Zyr+9urGfYAPtCJE1FOc7q3UBbgGSAKaKiHXrseZe60/zfRzFtM6+/KRwOCcc4L1B5O5Q==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@orderly.network/i18n@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-EO0sSusSeggHb0CEqyM6MOh8KQIcuu+lj+7SPYb447MxJ9H1pIimtpuln6CtNLiInZnEAMvY5MkjcXsZgVc0ew==}
+  '@orderly.network/i18n@3.0.0-beta.0':
+    resolution: {integrity: sha512-JLhzNxb3KjX/C6GEv4drOdxxaOI2Y24Q4PUSqFMBUPjVWhb9cIaMF6JaEbP/EpQSgilEog2830BwNAedVkChUg==}
     hasBin: true
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@orderly.network/net@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-UpgDoGY8aptF6uQnRqbEv0ijS0QAhICRwbWLCmQaJaJNuhPOqwe1c3vuisbn2T8aS8ZZHNgddz/V6OY2pCrHFA==}
+  '@orderly.network/net@3.0.0-beta.0':
+    resolution: {integrity: sha512-KmBn88+9Ygruga6TcPr1DXgXy4bZSitp9lsw6xYQ+hf53yTNNhj2QYMM4MgB+LXQJQa8owc8/ok9s1GREdGG7w==}
 
-  '@orderly.network/perp@4.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-RRuDTcfcvOypET9zx/f/wS/bO9psOS/27mDuaTIzCh55XGDbxRb2nicfuOyHLxfzNgGE6Uc9v/wXI3LBEQznEg==}
+  '@orderly.network/perp@5.0.0-beta.0':
+    resolution: {integrity: sha512-rNr4irVeRqSSt7/xRY7F/nSm756eLGIRcykjfjUp6OzHvVgnoMD+wfMeCmtMsPQAtiIOhCpWn0WtohKmJxvYFA==}
 
-  '@orderly.network/plugin-core@2.8.14-internal-plugin-beta.0':
-    resolution: {integrity: sha512-DaxWTwSorinUhRcg5xIYF+7iNNJLVSYv10Fpux+PCV+yHLRjaLj3Pj50hGtpunZHYL8rOI/TGO8ksnUQIKCi4A==}
+  '@orderly.network/plugin-core@3.0.0-beta.0':
+    resolution: {integrity: sha512-/92Fg58+MNOHTIeEuIctL9ui6HAXGg91D7QwlG/pwJ2o8UlV+Qe3zUDKDrN4c74iB5408CGThzP29xKd/Yw7KA==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@orderly.network/types@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-papEAHlJUNLdJyTzIZDopV/iqErZzmRl8cjhNvDJml8LJiDpvv0u4Qqj5IJpVRCwl6Xmgqno7LuqCsANesHzbA==}
+  '@orderly.network/types@3.0.0-beta.0':
+    resolution: {integrity: sha512-NY8BPi3YklTvujdxS8+brNfECEXvBH1XEfP9JNQeoYhg8gJboyb6JPMmbCq/ykzk3yT/uaMIcXQ8MuCBcoV9Zw==}
 
-  '@orderly.network/ui@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-WZYPYIIdR16SUZFvOMytB7Z3ix4eMWPxMnm3SnRGNn/qXg0KyOe+0jVxTOTLmZU8RzKsmp1uoWwSGn9XHZefCQ==}
+  '@orderly.network/ui@3.0.0-beta.0':
+    resolution: {integrity: sha512-9kKTrqiqz3RQLCRPrw70sAignFTYf9t8Nr15qipFrvwrIuPq3bFdovFu84Bi9E3uzkwS+hmAJccj5J8qGuw0YQ==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@orderly.network/utils@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-phrXyTIDuxlEekDWEqN8UeTSEvK0Hgvw6AFrunOixZGvX6N9TrPFL1gZtXe0tDQxbWNKFwRovTRWMCga96Iy+g==}
+  '@orderly.network/utils@3.0.0-beta.0':
+    resolution: {integrity: sha512-kcG5Uk3N0fXf5rn/9VyBkQzBLauWVgAvkcpMoFZoxbey42TvaeNGJQOYspYfasH0wKlBX2x4bJGKNhPc2szEUg==}
 
-  '@orderly.network/web3-provider-ethers@2.10.2-internal-plugin-beta.0':
-    resolution: {integrity: sha512-Ml7Tfbc57begsbBFRqFRmhzcYIVNlul2zS7RGRL2V+mgsh6k7K2xqauiQCe+yArL/EnbSSEm/gERJ45oZmxivA==}
+  '@orderly.network/web3-provider-ethers@3.0.0-beta.0':
+    resolution: {integrity: sha512-14tDBvfEkaPPBfizsi0fvoQq+IGW8H0jhyfrB4+z2ef3e3MsusitXpQjXiXQ8/7d6jwjgdqyq9gmlPFoJaIZ/g==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3446,10 +3446,10 @@ snapshots:
 
   '@noble/secp256k1@1.7.2': {}
 
-  '@orderly.network/core@2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/core@3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
       '@noble/ed25519': 2.3.0
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/types': 3.0.0-beta.0
       '@solana/web3.js': 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
       bs58: 5.0.0
       ethers: 6.16.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
@@ -3462,11 +3462,11 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@orderly.network/default-evm-adapter@2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/default-evm-adapter@3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
       '@noble/ed25519': 2.3.0
-      '@orderly.network/core': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/core': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/types': 3.0.0-beta.0
       bs58: 5.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -3474,14 +3474,14 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@orderly.network/default-solana-adapter@2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/default-solana-adapter@3.0.0-beta.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
       '@coral-xyz/anchor': 0.29.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@layerzerolabs/lz-solana-sdk-v2': 2.3.45-oft-rc.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@layerzerolabs/lz-v2-utilities': 2.3.45-oft-rc.0
       '@noble/ed25519': 2.3.0
-      '@orderly.network/core': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/core': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/types': 3.0.0-beta.0
       '@solana/spl-token': 0.4.8(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))
       '@solana/web3.js': 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
@@ -3497,19 +3497,19 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@orderly.network/hooks@2.10.2-internal-plugin-beta.0(@types/react@18.3.28)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/hooks@3.0.0-beta.0(@types/react@18.3.28)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
       '@akamfoad/qr': 0.4.0
       '@amplitude/analytics-browser': 2.11.13
-      '@orderly.network/core': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/default-evm-adapter': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/default-solana-adapter': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/net': 2.10.2-internal-plugin-beta.0
-      '@orderly.network/perp': 4.10.2-internal-plugin-beta.0
-      '@orderly.network/plugin-core': 2.8.14-internal-plugin-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
-      '@orderly.network/utils': 2.10.2-internal-plugin-beta.0
-      '@orderly.network/web3-provider-ethers': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/core': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/default-evm-adapter': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/default-solana-adapter': 3.0.0-beta.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/net': 3.0.0-beta.0
+      '@orderly.network/perp': 5.0.0-beta.0
+      '@orderly.network/plugin-core': 3.0.0-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/types': 3.0.0-beta.0
+      '@orderly.network/utils': 3.0.0-beta.0
+      '@orderly.network/web3-provider-ethers': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
       immer: 10.2.0
       lodash: 4.17.23
       ramda: 0.29.1
@@ -3529,7 +3529,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@orderly.network/i18n@2.10.2-internal-plugin-beta.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)':
+  '@orderly.network/i18n@3.0.0-beta.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)':
     dependencies:
       i18next: 24.2.3(typescript@5.9.3)
       i18next-browser-languagedetector: 8.2.1
@@ -3540,20 +3540,20 @@ snapshots:
       - react-native
       - typescript
 
-  '@orderly.network/net@2.10.2-internal-plugin-beta.0':
+  '@orderly.network/net@3.0.0-beta.0':
     dependencies:
       eventemitter3: 5.0.4
 
-  '@orderly.network/perp@4.10.2-internal-plugin-beta.0':
+  '@orderly.network/perp@5.0.0-beta.0':
     dependencies:
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
-      '@orderly.network/utils': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/types': 3.0.0-beta.0
+      '@orderly.network/utils': 3.0.0-beta.0
 
-  '@orderly.network/plugin-core@2.8.14-internal-plugin-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/plugin-core@3.0.0-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
-      '@orderly.network/core': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
-      '@orderly.network/utils': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/core': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/types': 3.0.0-beta.0
+      '@orderly.network/utils': 3.0.0-beta.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-error-boundary: 4.1.2(react@18.3.1)
@@ -3563,14 +3563,14 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@orderly.network/types@2.10.2-internal-plugin-beta.0':
+  '@orderly.network/types@3.0.0-beta.0':
     dependencies:
       superstruct: 2.0.2
 
-  '@orderly.network/ui@2.10.2-internal-plugin-beta.0(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(bufferutil@4.1.0)(embla-carousel@8.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.2.1)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/ui@3.0.0-beta.0(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(bufferutil@4.1.0)(embla-carousel@8.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.2.1)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
-      '@orderly.network/plugin-core': 2.8.14-internal-plugin-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/utils': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/plugin-core': 3.0.0-beta.0(bufferutil@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/utils': 3.0.0-beta.0
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.12(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3609,16 +3609,16 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@orderly.network/utils@2.10.2-internal-plugin-beta.0':
+  '@orderly.network/utils@3.0.0-beta.0':
     dependencies:
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/types': 3.0.0-beta.0
       dayjs: 1.11.19
       decimal.js-light: 2.5.1
 
-  '@orderly.network/web3-provider-ethers@2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)':
+  '@orderly.network/web3-provider-ethers@3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
-      '@orderly.network/default-evm-adapter': 2.10.2-internal-plugin-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@orderly.network/types': 2.10.2-internal-plugin-beta.0
+      '@orderly.network/default-evm-adapter': 3.0.0-beta.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@orderly.network/types': 3.0.0-beta.0
       ethers: 6.16.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
       ethers-decode-error: 2.1.3(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@6.0.6))
     transitivePeerDependencies:
