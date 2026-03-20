@@ -2,7 +2,6 @@
 
 A YouTube Live plugin for the Orderly SDK. Mounts a **draggable floating live-video widget** next to the trading UI, with Picture-in-Picture (PiP), iframe / video display modes, layout persistence, and i18n.
 
-<img src="assets/preview.png" alt="YouTube Live Widget" width="400" />
 
 ## Features
 
@@ -10,13 +9,11 @@ A YouTube Live plugin for the Orderly SDK. Mounts a **draggable floating live-vi
 
 Shows a draggable live-video panel beside the trading view, so traders can watch a YouTube live (or any embedded page / stream URL) without blocking the main trading area. Supports iframe embeds (e.g. YouTube live page) and direct video URLs (e.g. m3u8), with resizable width and height.
 
-<img src="assets/preview2.png" alt="YouTube Live beside trading" width="400" />
 
 ### Picture-in-Picture (PiP)
 
 Supports browser-native Picture-in-Picture so users can pop the video out into a small always-on-top window. Optionally, the widget can auto-enter PiP when the tab becomes hidden, making it easier to keep watching while multitasking.
 
-<img src="assets/pip-preview.png" alt="YouTube Live PiP mode" width="400" />
 
 ### Multi-language & Layout Persistence
 
