@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { expect, userEvent, within } from "storybook/test";
 
 import { registerOrderlyYoutubeLivePlugin } from "../index";
 
@@ -18,6 +17,23 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
+  args: {
+    symbol: "PERP_BTC_USDC",
+    tradingViewConfig: tradingPageConfig.tradingViewConfig,
+    sharePnLConfig: tradingPageConfig.sharePnLConfig,
+    src: "https://www.youtube.com/embed/lfDr_glhN64?si=UcTI5GvRwjWH6i5W",
+    title: 'How LayerZero Powers Omni-chain Trading on Orderly'
+  },
+  argTypes: {
+    symbol: {
+      control: "select",
+      options: ["PERP_BTC_USDC", "PERP_ETH_USDC"],
+    },
+    src: {
+      control: "text",
+      description: "The source URL of the YouTube video",
+    },
+  },
 } satisfies Meta<typeof TradingPage>;
 
 export default meta;
@@ -32,10 +48,10 @@ export const Default: Story = {
     }, [symbol]);
 
     return <OrderlyPluginProvider plugins={[registerOrderlyYoutubeLivePlugin({
-      src: "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+      src: arg.src,
       className: "my-youtube-live", // optional
       displayMode: "iframe", // "iframe" | "video"
-      title: "Live", // optional
+      title: arg.title, // optional
       defaultWidth: 384,
       defaultHeight: 216,
       autoPipOnVisibilityChange: false,
@@ -46,8 +62,6 @@ export const Default: Story = {
     })]}>
       <TradingPage
         {...arg}
-        tradingViewConfig={tradingPageConfig.tradingViewConfig}
-        sharePnLConfig={tradingPageConfig.sharePnLConfig}
         symbol={symbol}
         onSymbolChange={(symbol) => {
           setSymbol(symbol.symbol);

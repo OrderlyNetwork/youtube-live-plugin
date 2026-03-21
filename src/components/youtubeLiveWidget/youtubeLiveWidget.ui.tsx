@@ -17,7 +17,7 @@ const MEDIA_FILL_STYLE: React.CSSProperties = {
 };
 
 const TOOLBAR_CLASS =
-  "oui-w-full oui-bg-base-8 oui-rounded-lg oui-px-2.5 oui-py-2 oui-text-white oui-text-xs oui-flex-shrink-0";
+  "oui-w-full oui-px-2 oui-bg-base-8 oui-rounded-t-lg oui-px-2 oui-py-2 oui-text-white oui-text-xs oui-flex-shrink-0";
 
 export type YoutubeLiveWidgetProps = YoutubeLiveWidgetState & {
   className?: string;
@@ -65,7 +65,7 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
     <Flex
       ref={widgetRef}
       id="youtube-live-widget"
-      className={cn(className)}
+      className={cn('oui-rounded-lg oui-shadow-lg oui-overflow-hidden oui-border oui-border-line-12', className)}
       direction="column"
       position="fixed"
       style={{
@@ -96,17 +96,24 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
           }}
           onPointerDown={onDragHandlePointerDown}
         >
-          {title != null ? (
-            <span data-no-drag className="oui-ml-2">
-              {typeof title === "string" ? (
-                <Text size="2xs" className="oui-whitespace-nowrap">
-                  {title}
-                </Text>
-              ) : (
-                title
-              )}
-            </span>
-          ) : null}
+          <div className="oui-flex-1">
+            {title != null ? (
+              <span>
+                {typeof title === "string" ? (
+                  <Text
+                    size="2xs"
+                    className="oui-whitespace-nowrap oui-overflow-hidden oui-text-ellipsis"
+                    style={{ maxWidth: '80%', display: "block" }}
+                    title={typeof title === "string" ? title : undefined}
+                  >
+                    {title}
+                  </Text>
+                ) : (
+                  title
+                )}
+              </span>
+            ) : null}
+          </div>
           <PipIcon
             data-no-drag
             size={16}
@@ -127,7 +134,7 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
       <Box
         ref={wrapperRef}
         className={cn(
-          "oui-resize oui-resize-both oui-overflow-hidden oui-bg-black oui-rounded-xl",
+          "oui-resize oui-resize-both oui-overflow-hidden oui-bg-base-9",
           "oui-shadow-[0_10px_30px_rgba(0,0,0,0.45)] oui-flex-shrink-0",
         )}
         style={{
