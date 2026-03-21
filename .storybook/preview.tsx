@@ -1,6 +1,7 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
 import { OrderlyForStoryBookProvider } from "./orderlyForStoryBookProvider";
+// import "../src/styles.css";
 
 // window.Buffer = window.Buffer || require("buffer").Buffer;
 
