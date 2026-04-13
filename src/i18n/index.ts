@@ -1,1 +1,1 @@
-export { YoutubeLiveLocaleProvider } from "./provider";
+export { LocaleProvider } from "./provider";

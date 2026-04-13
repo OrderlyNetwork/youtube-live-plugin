@@ -3,12 +3,12 @@ import { createInterceptor } from "@orderly.network/plugin-core";
 import type { OrderlySDK } from "@orderly.network/plugin-core";
 import type { VideoDisplayMode } from "./components/youtubeLiveWidget";
 import { YoutubeLiveWidgetWidget } from "./components/youtubeLiveWidget/youtubeLiveWidget.widget";
-import { YoutubeLiveLocaleProvider } from "./i18n";
+import { LocaleProvider } from "./i18n";
 
 const YoutubeLiveWidget = YoutubeLiveWidgetWidget;
 
 export { YoutubeLiveWidget };
-export { YoutubeLiveLocaleProvider } from "./i18n";
+export { LocaleProvider as YoutubeLiveLocaleProvider } from "./i18n";
 export type { VideoDisplayMode };
 
 export interface OrderlyYoutubeLivePluginOptions {
@@ -45,7 +45,7 @@ export interface OrderlyYoutubeLivePluginOptions {
  * Intercepts a target component and injects custom UI.
  */
 export function registerOrderlyYoutubeLivePlugin(
-  options: OrderlyYoutubeLivePluginOptions,
+  options: OrderlyYoutubeLivePluginOptions
 ) {
   return (SDK: OrderlySDK) => {
     SDK.registerPlugin({
@@ -58,7 +58,7 @@ export function registerOrderlyYoutubeLivePlugin(
         createInterceptor("Trading.TradingPage", (Original, props, _api) => (
           <>
             <Original {...props} />
-            <YoutubeLiveLocaleProvider>
+            <LocaleProvider>
               <YoutubeLiveWidget
                 className={options.className}
                 src={options.src}
@@ -74,7 +74,7 @@ export function registerOrderlyYoutubeLivePlugin(
                 muted={options.muted}
                 controls={options.controls}
               />
-            </YoutubeLiveLocaleProvider>
+            </LocaleProvider>
           </>
         )),
       ],

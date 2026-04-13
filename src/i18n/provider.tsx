@@ -1,20 +1,20 @@
 import { FC, PropsWithChildren } from "react";
 import {
-  preloadDefaultResource,
+  AsyncResources,
   ExternalLocaleProvider,
   LocaleCode,
+  LocaleEnum,
 } from "@orderly.network/i18n";
-import { YoutubeLiveLocales, TYoutubeLiveLocales } from "./module";
+import { LocaleMessages } from "./module";
 
-preloadDefaultResource(YoutubeLiveLocales);
-
-const resources = (lang: LocaleCode) => {
-  return import(`./locales/${lang}.json`).then(
-    (res) => res.default as TYoutubeLiveLocales
-  );
+const resources: AsyncResources = async (lang: LocaleCode) => {
+  if (lang === LocaleEnum.en) {
+    return LocaleMessages;
+  }
+  return import(`./locales/${lang}.json`).then((res) => res.default);
 };
 
-export const YoutubeLiveLocaleProvider: FC<PropsWithChildren> = (props) => {
+export const LocaleProvider: FC<PropsWithChildren> = (props) => {
   return (
     <ExternalLocaleProvider resources={resources}>
       {props.children}
