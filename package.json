@@ -17,19 +17,19 @@
     "README.md"
   ],
   "peerDependencies": {
-    "@orderly.network/hooks": "3.0.0-beta.0",
-    "@orderly.network/i18n": "3.0.0-beta.0",
-    "@orderly.network/plugin-core": "3.0.0-beta.0",
-    "@orderly.network/types": "3.0.0-beta.0",
-    "@orderly.network/ui": "3.0.0-beta.0",
-    "@orderly.network/utils": "3.0.0-beta.0",
+    "@orderly.network/hooks": "3.0.0-beta.2",
+    "@orderly.network/i18n": "3.0.0-beta.2",
+    "@orderly.network/plugin-core": "3.0.0-beta.2",
+    "@orderly.network/types": "3.0.0-beta.2",
+    "@orderly.network/ui": "3.0.0-beta.2",
+    "@orderly.network/utils": "3.0.0-beta.2",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@orderly.network/core": "3.0.0-beta.0",
-    "@orderly.network/react-app": "3.0.0-beta.0",
-    "@orderly.network/trading": "3.0.0-beta.0",
+    "@orderly.network/core": "3.0.0-beta.2",
+    "@orderly.network/react-app": "3.0.0-beta.2",
+    "@orderly.network/trading": "3.0.0-beta.2",
     "@storybook/react": "^10.3.0",
     "@storybook/react-vite": "^10.3.0",
     "@storybook/react-webpack5": "^10.3.0",
@@ -48,8 +48,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@orderly.network/wallet-connector-privy": "3.0.0-beta.0",
-    "@orderly.network/ui-scaffold": "3.0.0-beta.0",
+    "@orderly.network/wallet-connector-privy": "3.0.0-beta.2",
+    "@orderly.network/ui-scaffold": "3.0.0-beta.2",
     "@solana-mobile/wallet-adapter-mobile": "^2.2.6",
     "@solana/wallet-adapter-base": "^0.9.27",
     "@solana/wallet-adapter-wallets": "^0.19.37"
