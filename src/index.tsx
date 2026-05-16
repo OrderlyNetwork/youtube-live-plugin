@@ -1,3 +1,4 @@
+import "./styles.css";
 import React from "react";
 import { createInterceptor } from "@orderly.network/plugin-core";
 import type { OrderlySDK } from "@orderly.network/plugin-core";

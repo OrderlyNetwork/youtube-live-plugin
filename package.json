@@ -6,9 +6,10 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup && cp -r src/i18n/locales dist/locales",
+    "build": "tsup && pnpm run build:css && cp -r src/i18n/locales dist/locales",
     "dev": "tsup --watch",
     "prepublishOnly": "pnpm build",
+    "build:css": "tailwindcss build -i src/tailwind.css -o dist/styles.css --minify",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -40,6 +41,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^10.3.0",
+    "tailwindcss": "^3.4.4",
+    "tailwindcss-animate": "^1.0.6",
     "tsup": "^8.5.1",
     "typescript": "^5.1.6",
     "vite-plugin-node-polyfills": "^0.25.0"
