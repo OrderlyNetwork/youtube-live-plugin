@@ -2,7 +2,7 @@ import React, { FC, memo } from "react";
 import { useTranslation } from "@orderly.network/i18n";
 import { Box, cn, Flex, Text } from "@orderly.network/ui";
 import PipIcon from "../pip_icon";
-import { LocaleMessages } from "../../i18n/module";
+import { TLocaleMessages } from "../../i18n/module";
 import type { YoutubeLiveWidgetState } from "./youtubeLiveWidget.script";
 
 const MEDIA_FILL_STYLE: React.CSSProperties = {
@@ -30,7 +30,7 @@ export type YoutubeLiveWidgetProps = YoutubeLiveWidgetState & {
 
 export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
   const { t: tBase } = useTranslation();
-  const t = tBase as (key: keyof typeof LocaleMessages) => string;
+  const t = tBase as (key: keyof TLocaleMessages) => string;
   const {
     className,
     style,

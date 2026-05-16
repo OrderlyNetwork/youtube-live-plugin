@@ -5,3 +5,5 @@ export const LocaleMessages = {
   "youtubeLive.videoNotReady": "Video element is not ready",
   "youtubeLive.titleYouTubeLive": "YouTube Live",
 };
+
+export type TLocaleMessages = typeof LocaleMessages;
