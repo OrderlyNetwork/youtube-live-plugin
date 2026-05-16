@@ -2,7 +2,7 @@ import React, { FC, memo } from "react";
 import { useTranslation } from "@orderly.network/i18n";
 import { Box, cn, Flex, Text } from "@orderly.network/ui";
 import PipIcon from "../pip_icon";
-import type { TYoutubeLiveLocales } from "../../i18n/module";
+import { LocaleMessages } from "../../i18n/module";
 import type { YoutubeLiveWidgetState } from "./youtubeLiveWidget.script";
 
 const MEDIA_FILL_STYLE: React.CSSProperties = {
@@ -30,7 +30,7 @@ export type YoutubeLiveWidgetProps = YoutubeLiveWidgetState & {
 
 export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
   const { t: tBase } = useTranslation();
-  const t = tBase as (key: keyof TYoutubeLiveLocales) => string;
+  const t = tBase as (key: keyof typeof LocaleMessages) => string;
   const {
     className,
     style,
@@ -65,7 +65,10 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
     <Flex
       ref={widgetRef}
       id="youtube-live-widget"
-      className={cn('oui-rounded-lg oui-shadow-lg oui-overflow-hidden oui-border oui-border-line-12', className)}
+      className={cn(
+        "oui-rounded-lg oui-shadow-lg oui-overflow-hidden oui-border oui-border-line-12",
+        className
+      )}
       direction="column"
       position="fixed"
       style={{
@@ -103,7 +106,7 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
                   <Text
                     size="2xs"
                     className="oui-whitespace-nowrap oui-overflow-hidden oui-text-ellipsis"
-                    style={{ maxWidth: '80%', display: "block" }}
+                    style={{ maxWidth: "80%", display: "block" }}
                     title={typeof title === "string" ? title : undefined}
                   >
                     {title}
@@ -135,7 +138,7 @@ export const YoutubeLiveWidget: FC<YoutubeLiveWidgetProps> = memo((props) => {
         ref={wrapperRef}
         className={cn(
           "oui-resize oui-resize-both oui-overflow-hidden oui-bg-base-9",
-          "oui-shadow-[0_10px_30px_rgba(0,0,0,0.45)] oui-flex-shrink-0",
+          "oui-shadow-[0_10px_30px_rgba(0,0,0,0.45)] oui-flex-shrink-0"
         )}
         style={{
           position: "relative",
