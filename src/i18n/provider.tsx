@@ -2,16 +2,47 @@ import { FC, PropsWithChildren } from "react";
 import {
   AsyncResources,
   ExternalLocaleProvider,
+  importLocaleJsonModule,
   LocaleCode,
   LocaleEnum,
+  type LocaleJsonModule,
 } from "@orderly.network/i18n";
 import { LocaleMessages } from "./module";
 
-const resources: AsyncResources = async (lang: LocaleCode) => {
+/**
+ * One explicit dynamic import per locale so webpack/Next can statically resolve chunks.
+ * Vite accepts the same pattern; avoid variable-path dynamic imports for locale JSON.
+ *
+ * @see packages/i18n/docs/guide/examples.md — Async resources (Next.js and webpack)
+ */
+type LocaleJsonLoader = () => Promise<LocaleJsonModule>;
+
+const localeJsonLoaders: Record<LocaleEnum, LocaleJsonLoader | undefined> = {
+  [LocaleEnum.en]: undefined,
+  [LocaleEnum.zh]: () => import("./locales/zh.json"),
+  [LocaleEnum.ja]: () => import("./locales/ja.json"),
+  [LocaleEnum.es]: () => import("./locales/es.json"),
+  [LocaleEnum.ko]: () => import("./locales/ko.json"),
+  [LocaleEnum.vi]: () => import("./locales/vi.json"),
+  [LocaleEnum.de]: () => import("./locales/de.json"),
+  [LocaleEnum.fr]: () => import("./locales/fr.json"),
+  [LocaleEnum.ru]: () => import("./locales/ru.json"),
+  [LocaleEnum.id]: () => import("./locales/id.json"),
+  [LocaleEnum.tr]: () => import("./locales/tr.json"),
+  [LocaleEnum.it]: () => import("./locales/it.json"),
+  [LocaleEnum.pt]: () => import("./locales/pt.json"),
+  [LocaleEnum.uk]: () => import("./locales/uk.json"),
+  [LocaleEnum.pl]: () => import("./locales/pl.json"),
+  [LocaleEnum.nl]: () => import("./locales/nl.json"),
+  [LocaleEnum.tc]: () => import("./locales/tc.json"),
+};
+
+const resources: AsyncResources = async (lang: LocaleCode, _ns: string) => {
   if (lang === LocaleEnum.en) {
     return LocaleMessages;
   }
-  return import(`./locales/${lang}.json`).then((res) => res.default);
+  const loader = localeJsonLoaders[lang as LocaleEnum];
+  return importLocaleJsonModule(loader);
 };
 
 export const LocaleProvider: FC<PropsWithChildren> = (props) => {
